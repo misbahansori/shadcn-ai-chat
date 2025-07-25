@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { LucideGlobe, LucideMic, LucidePlus } from "lucide-vue-next";
 
-const text = ref("");
+const text = ref("asdsad");
 const model = ref("gpt-4");
 const status = ref<"submitted" | "streaming" | "ready" | "error">("ready");
 
