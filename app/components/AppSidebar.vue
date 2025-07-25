@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { GalleryVerticalEnd, Minus, Plus } from "lucide-vue-next";
 import type { SidebarProps } from "~/components/ui/sidebar";
 
 const props = defineProps<SidebarProps>();
 
-// This is sample data.
 const data = {
+  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
   navMain: [
     {
       title: "Getting Started",
@@ -132,16 +131,6 @@ const data = {
         },
       ],
     },
-    {
-      title: "Community",
-      url: "#",
-      items: [
-        {
-          title: "Contribution Guide",
-          url: "#",
-        },
-      ],
-    },
   ],
 };
 </script>
@@ -149,64 +138,23 @@ const data = {
 <template>
   <Sidebar v-bind="props">
     <SidebarHeader>
-      <SidebarMenu>
-        <SidebarMenuItem>
-          <SidebarMenuButton size="lg" as-child>
-            <a href="#">
-              <div
-                class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
-              >
-                <GalleryVerticalEnd class="size-4" />
-              </div>
-              <div class="flex flex-col gap-0.5 leading-none">
-                <span class="font-semibold">Documentation</span>
-                <span class="">v1.0.0</span>
-              </div>
-            </a>
-          </SidebarMenuButton>
-        </SidebarMenuItem>
-      </SidebarMenu>
-      <SearchForm />
+      <span class="text-lg font-bold">Shadcn UI Chat</span>
     </SidebarHeader>
     <SidebarContent>
-      <SidebarGroup>
-        <SidebarMenu>
-          <Collapsible
-            v-for="(item, index) in data.navMain"
-            :key="item.title"
-            :default-open="index === 1"
-            class="group/collapsible"
-          >
-            <SidebarMenuItem>
-              <CollapsibleTrigger as-child>
-                <SidebarMenuButton>
-                  {{ item.title }}
-                  <Plus
-                    class="ml-auto group-data-[state=open]/collapsible:hidden"
-                  />
-                  <Minus
-                    class="ml-auto group-data-[state=closed]/collapsible:hidden"
-                  />
-                </SidebarMenuButton>
-              </CollapsibleTrigger>
-              <CollapsibleContent v-if="item.items.length">
-                <SidebarMenuSub>
-                  <SidebarMenuSubItem
-                    v-for="childItem in item.items"
-                    :key="childItem.title"
-                  >
-                    <SidebarMenuSubButton
-                      as-child
-                      :is-active="childItem.isActive"
-                    >
-                      <a :href="childItem.url">{{ childItem.title }}</a>
-                    </SidebarMenuSubButton>
-                  </SidebarMenuSubItem>
-                </SidebarMenuSub>
-              </CollapsibleContent>
+      <SidebarGroup v-for="item in data.navMain" :key="item.title">
+        <SidebarGroupLabel>{{ item.title }}</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            <SidebarMenuItem
+              v-for="childItem in item.items"
+              :key="childItem.title"
+            >
+              <SidebarMenuButton as-child :is-active="childItem.isActive">
+                <a :href="childItem.url">{{ childItem.title }}</a>
+              </SidebarMenuButton>
             </SidebarMenuItem>
-          </Collapsible>
-        </SidebarMenu>
+          </SidebarMenu>
+        </SidebarGroupContent>
       </SidebarGroup>
     </SidebarContent>
     <SidebarRail />
