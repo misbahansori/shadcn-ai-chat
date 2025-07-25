@@ -13,7 +13,7 @@ const props = defineProps<Props>();
   <form
     :class="
       cn(
-        'bg-background w-full divide-y overflow-hidden rounded-xl border shadow-sm',
+        'bg-background w-full divide-y overflow-hidden rounded-xl border p-1 shadow-sm',
         props.class,
       )
     "
