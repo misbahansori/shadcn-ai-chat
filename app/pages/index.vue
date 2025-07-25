@@ -1,3 +1,11 @@
+<script setup lang="ts"></script>
+
 <template>
-  <Hero />
+  <SidebarProvider>
+    <AppSidebar />
+    <main>
+      <SidebarTrigger />
+      <RouterView />
+    </main>
+  </SidebarProvider>
 </template>
