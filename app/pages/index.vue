@@ -63,18 +63,18 @@ const suggestions = [
               </AIMessage>
             </div>
           </div>
-          <div class="flex flex-col gap-1">
-            <ScrollArea class="pb-3 whitespace-nowrap">
-              <Badge
+          <div class="flex flex-col gap-2">
+            <div class="flex flex-wrap gap-2 overflow-x-auto">
+              <Button
                 v-for="suggestion in suggestions"
                 :key="suggestion"
                 variant="outline"
-                class="rounded-full px-4 py-1 text-sm"
+                class="h-auto rounded-full px-4 py-1 text-sm"
               >
                 {{ suggestion }}
-              </Badge>
-              <ScrollBar orientation="horizontal" />
-            </ScrollArea>
+              </Button>
+            </div>
+
             <ChatInput />
           </div>
         </div>
