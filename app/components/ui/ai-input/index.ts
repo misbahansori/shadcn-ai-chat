@@ -4,4 +4,3 @@ export { default as AIInputToolbar } from "./AIInputToolbar.vue";
 export { default as AIInputTools } from "./AIInputTools.vue";
 export { default as AIInputButton } from "./AIInputButton.vue";
 export { default as AIInputSubmit } from "./AIInputSubmit.vue";
-export { default as AIInputExample } from "./AIInputExample.vue";
