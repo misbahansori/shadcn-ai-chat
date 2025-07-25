@@ -4,8 +4,11 @@
   <SidebarProvider>
     <AppSidebar />
     <main class="flex-1">
-      <div class="flex flex-col gap-4">
-        <h1 class="text-2xl font-bold">Hello World</h1>
+      <div class="mx-auto max-w-3xl px-4">
+        <div class="flex h-screen flex-col gap-4">
+          <div class="flex-1"></div>
+          <AIInputExample />
+        </div>
       </div>
     </main>
   </SidebarProvider>
