@@ -165,6 +165,57 @@ const suggestions = [
 <template>
   <SidebarProvider>
     <AppSidebar />
+    <SidebarInset>
+      <header
+        class="bg-background absolute inset-x-0 top-0 z-10 flex h-12 w-full shrink-0 items-center gap-2 rounded-t-lg"
+      >
+        <div class="flex w-full items-center gap-2 px-4">
+          <SidebarTrigger class="-ml-1" />
+          <Separator orientation="vertical" class="mr-2 h-4" />
+          <span class="text-sm font-medium">Shadcn Chat</span>
+        </div>
+      </header>
+      <div
+        class="flex max-h-[calc(100vh-4rem)] flex-1 flex-col gap-4 overflow-y-auto p-4 pt-0"
+      >
+        <div class="mx-auto max-w-3xl">
+          <div class="flex-1 pb-64">
+            <div class="space-y-4">
+              <AIMessage
+                v-for="(message, index) in messages"
+                :key="index"
+                :from="message.from"
+              >
+                <AIMessageContent>{{ message.content }}</AIMessageContent>
+                <AIMessageAvatar :name="message.name" :src="message.avatar" />
+              </AIMessage>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="absolute inset-x-0 bottom-2 flex flex-col gap-2">
+        <div class="mx-auto w-full max-w-3xl">
+          <div
+            v-if="!messages.length"
+            class="flex flex-wrap gap-2 overflow-x-auto"
+          >
+            <Button
+              v-for="suggestion in suggestions"
+              :key="suggestion"
+              variant="outline"
+              class="h-auto rounded-full px-4 py-1 text-sm"
+            >
+              {{ suggestion }}
+            </Button>
+          </div>
+
+          <ChatInput class="w-full" />
+        </div>
+      </div>
+    </SidebarInset>
+  </SidebarProvider>
+  <!-- <SidebarProvider>
+    <AppSidebar />
     <main class="flex-1">
       <div class="mx-auto max-w-3xl px-4">
         <div class="flex h-screen flex-col gap-4">
@@ -204,5 +255,5 @@ const suggestions = [
         </div>
       </div>
     </main>
-  </SidebarProvider>
+  </SidebarProvider> -->
 </template>

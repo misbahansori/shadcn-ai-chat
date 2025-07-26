@@ -1,162 +1,160 @@
 <script setup lang="ts">
+import { LucideMessageCircle } from "lucide-vue-next";
 import type { SidebarProps } from "~/components/ui/sidebar";
 
-const props = defineProps<SidebarProps>();
+const props = withDefaults(defineProps<SidebarProps>(), {
+  variant: "inset",
+});
 
-const data = {
-  versions: ["1.0.1", "1.1.0-alpha", "2.0.0-beta1"],
-  navMain: [
-    {
-      title: "Getting Started",
-      url: "#",
-      items: [
-        {
-          title: "Installation",
-          url: "#",
-        },
-        {
-          title: "Project Structure",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Building Your Application",
-      url: "#",
-      items: [
-        {
-          title: "Routing",
-          url: "#",
-        },
-        {
-          title: "Data Fetching",
-          url: "#",
-          isActive: true,
-        },
-        {
-          title: "Rendering",
-          url: "#",
-        },
-        {
-          title: "Caching",
-          url: "#",
-        },
-        {
-          title: "Styling",
-          url: "#",
-        },
-        {
-          title: "Optimizing",
-          url: "#",
-        },
-        {
-          title: "Configuring",
-          url: "#",
-        },
-        {
-          title: "Testing",
-          url: "#",
-        },
-        {
-          title: "Authentication",
-          url: "#",
-        },
-        {
-          title: "Deploying",
-          url: "#",
-        },
-        {
-          title: "Upgrading",
-          url: "#",
-        },
-        {
-          title: "Examples",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "API Reference",
-      url: "#",
-      items: [
-        {
-          title: "Components",
-          url: "#",
-        },
-        {
-          title: "File Conventions",
-          url: "#",
-        },
-        {
-          title: "Functions",
-          url: "#",
-        },
-        {
-          title: "next.config.js Options",
-          url: "#",
-        },
-        {
-          title: "CLI",
-          url: "#",
-        },
-        {
-          title: "Edge Runtime",
-          url: "#",
-        },
-      ],
-    },
-    {
-      title: "Architecture",
-      url: "#",
-      items: [
-        {
-          title: "Accessibility",
-          url: "#",
-        },
-        {
-          title: "Fast Refresh",
-          url: "#",
-        },
-        {
-          title: "Next.js Compiler",
-          url: "#",
-        },
-        {
-          title: "Supported Browsers",
-          url: "#",
-        },
-        {
-          title: "Turbopack",
-          url: "#",
-        },
-      ],
-    },
-  ],
-};
+const pastConversations = [
+  {
+    id: 1,
+    name: "How to build a website",
+    description: "I want to build a website",
+  },
+  {
+    id: 2,
+    name: "JavaScript best practices",
+    description: "Learning modern JavaScript patterns",
+  },
+  {
+    id: 3,
+    name: "React vs Vue comparison",
+    description: "Which framework should I choose?",
+  },
+  {
+    id: 4,
+    name: "CSS Grid layout tutorial",
+    description: "Need help with responsive grid layouts",
+  },
+  {
+    id: 5,
+    name: "API integration guide",
+    description: "How to connect to external APIs",
+  },
+  {
+    id: 6,
+    name: "Database design principles",
+    description: "Planning my app's data structure",
+  },
+  {
+    id: 7,
+    name: "Authentication system",
+    description: "Implementing user login and security",
+  },
+  {
+    id: 8,
+    name: "Deployment strategies",
+    description: "Best practices for deploying web apps",
+  },
+  {
+    id: 9,
+    name: "Performance optimization",
+    description: "Making my app faster and more efficient",
+  },
+  {
+    id: 10,
+    name: "Testing strategies",
+    description: "Unit testing and integration testing",
+  },
+  {
+    id: 11,
+    name: "State management patterns",
+    description: "Managing app state effectively",
+  },
+  {
+    id: 12,
+    name: "Mobile responsive design",
+    description: "Making my app work on all devices",
+  },
+  {
+    id: 13,
+    name: "SEO optimization tips",
+    description: "Improving search engine visibility",
+  },
+  {
+    id: 14,
+    name: "Accessibility guidelines",
+    description: "Making my app accessible to everyone",
+  },
+  {
+    id: 15,
+    name: "Code review best practices",
+    description: "How to review code effectively",
+  },
+  {
+    id: 16,
+    name: "Git workflow strategies",
+    description: "Managing version control properly",
+  },
+  {
+    id: 17,
+    name: "Microservices architecture",
+    description: "Designing scalable backend systems",
+  },
+  {
+    id: 18,
+    name: "Cloud deployment options",
+    description: "AWS, Azure, or Google Cloud?",
+  },
+  {
+    id: 19,
+    name: "Security best practices",
+    description: "Protecting user data and preventing attacks",
+  },
+  {
+    id: 20,
+    name: "UI/UX design principles",
+    description: "Creating better user experiences",
+  },
+];
 </script>
 
 <template>
   <Sidebar v-bind="props">
     <SidebarHeader>
-      <span class="text-lg font-bold">Shadcn UI Chat</span>
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <SidebarMenuButton size="lg" as-child>
+            <a href="#">
+              <div
+                class="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg"
+              >
+                <LucideMessageCircle class="size-4" />
+              </div>
+              <div class="grid flex-1 text-left text-sm leading-tight">
+                <span class="truncate font-semibold">Shadcn Chat</span>
+                <span class="truncate text-xs">Chat with AI</span>
+              </div>
+            </a>
+          </SidebarMenuButton>
+        </SidebarMenuItem>
+      </SidebarMenu>
     </SidebarHeader>
     <SidebarContent>
-      <SidebarGroup v-for="item in data.navMain" :key="item.title">
-        <SidebarGroupLabel>{{ item.title }}</SidebarGroupLabel>
-        <SidebarGroupContent>
-          <SidebarMenu>
-            <SidebarMenuItem
-              v-for="childItem in item.items"
-              :key="childItem.title"
-            >
-              <SidebarMenuButton as-child :is-active="childItem.isActive">
-                <a :href="childItem.url">{{ childItem.title }}</a>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
-          </SidebarMenu>
-        </SidebarGroupContent>
+      <SidebarGroup>
+        <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem
+            v-for="conversation in pastConversations"
+            :key="conversation.id"
+          >
+            <SidebarMenuButton>
+              <span>{{ conversation.name }}</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuSeparator />
+        </SidebarMenu>
       </SidebarGroup>
     </SidebarContent>
-    <SidebarRail />
+    <SidebarFooter>
+      <SidebarUser
+        :user="{
+          name: 'John Doe',
+          email: 'john.doe@example.com',
+          avatar: 'https://github.com/misbahansori.png',
+        }"
+      />
+    </SidebarFooter>
   </Sidebar>
 </template>

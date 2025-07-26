@@ -34,7 +34,7 @@ const handleSubmit = (event: Event) => {
 </script>
 
 <template>
-  <AIInput @submit="handleSubmit" class="rounded-b-none">
+  <AIInput @submit="handleSubmit">
     <AIInputTextarea v-model="text" />
     <AIInputToolbar>
       <AIInputTools>
