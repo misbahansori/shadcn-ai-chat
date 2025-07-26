@@ -1,5 +1,7 @@
 <template>
   <div class="font-sans antialiased">
-    <slot />
+    <TooltipProvider>
+      <slot />
+    </TooltipProvider>
   </div>
 </template>

@@ -190,25 +190,43 @@ const suggestions = [
                 v-for="(message, index) in messages"
                 :key="index"
                 :from="message.from"
+                class="isolate"
               >
                 <AIMessageContainer>
                   <AIMessageContent>{{ message.content }}</AIMessageContent>
                   <AIMessageAvatar :name="message.name" :src="message.avatar" />
                 </AIMessageContainer>
-                <div
+                <AIMessageActions
                   v-if="message.from === 'assistant'"
                   class="mt-0.5 ml-8 flex items-center px-2"
                 >
-                  <Button variant="ghost" size="icon" class="size-7">
-                    <LucideCopy class="size-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon" class="size-7">
-                    <LucideThumbsUp class="size-4" />
-                  </Button>
-                  <Button variant="ghost" size="icon" class="size-7">
-                    <LucideThumbsDown class="size-4" />
-                  </Button>
-                </div>
+                  <Tooltip>
+                    <TooltipTrigger as-child>
+                      <Button variant="ghost" size="icon" class="size-7">
+                        <LucideCopy class="size-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">Copy</TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger as-child>
+                      <Button variant="ghost" size="icon" class="size-7">
+                        <LucideThumbsUp class="size-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">Good answer</TooltipContent>
+                  </Tooltip>
+
+                  <Tooltip>
+                    <TooltipTrigger as-child>
+                      <Button variant="ghost" size="icon" class="size-7">
+                        <LucideThumbsDown class="size-4" />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent side="bottom">Bad answer</TooltipContent>
+                  </Tooltip>
+                </AIMessageActions>
               </AIMessage>
             </div>
           </div>
