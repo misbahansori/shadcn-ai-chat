@@ -153,7 +153,6 @@ const pastConversations = [
               <span>{{ conversation.name }}</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
-          <SidebarMenuSeparator />
         </SidebarMenu>
       </SidebarGroup>
     </SidebarContent>

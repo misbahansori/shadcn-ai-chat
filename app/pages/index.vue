@@ -1,5 +1,12 @@
 <script setup lang="ts">
-import { LucideCopy, LucideThumbsDown, LucideThumbsUp } from "lucide-vue-next";
+import { useDark } from "@vueuse/core";
+import {
+  LucideCopy,
+  LucideMoon,
+  LucideSun,
+  LucideThumbsDown,
+  LucideThumbsUp,
+} from "lucide-vue-next";
 
 interface Message {
   from: "user" | "assistant";
@@ -162,22 +169,49 @@ const suggestions = [
   "What is the difference between SQL and NoSQL?",
   "Explain cloud computing basics",
 ];
+
+const isDark = useDark();
+
+function toggleTheme() {
+  console.log("toggleTheme", isDark.value);
+  isDark.value = !isDark.value;
+}
 </script>
 
 <template>
   <SidebarProvider>
     <AppSidebar />
     <SidebarInset>
-      <header
-        class="bg-background absolute inset-x-0 top-0 z-10 flex h-12 w-full shrink-0 items-center gap-2 rounded-t-lg"
-      >
-        <div class="flex w-full items-center gap-2 px-4">
-          <SidebarTrigger class="-ml-1" />
-          <Separator
-            orientation="vertical"
-            class="data-[orientation=vertical]:h-4"
-          />
-          <span class="text-sm font-medium">Shadcn Chat</span>
+      <header class="bg-background absolute inset-x-0 top-0 z-10 rounded-t-lg">
+        <div
+          class="flex h-12 w-full shrink-0 items-center justify-between gap-2"
+        >
+          <div class="flex w-full items-center gap-2 px-4">
+            <SidebarTrigger class="-ml-1" />
+            <Separator
+              orientation="vertical"
+              class="data-[orientation=vertical]:h-4"
+            />
+            <span class="text-sm font-medium">Shadcn Chat</span>
+          </div>
+          <div class="flex items-center gap-2 px-4">
+            <Toggle
+              variant="ghost"
+              size="icon"
+              class="group dark:hover:bg-muted size-7 dark:bg-transparent"
+              v-model="isDark"
+              :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
+            >
+              <LucideMoon
+                class="size-4 shrink-0 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
+                aria-hidden="true"
+              />
+              <LucideSun
+                class="absolute size-4 shrink-0 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
+                aria-hidden="true"
+              />
+            </Toggle>
+          </div>
         </div>
       </header>
       <div
