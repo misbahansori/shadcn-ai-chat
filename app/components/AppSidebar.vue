@@ -2,8 +2,13 @@
 import {
   LucideArrowRight,
   LucideMessageCircle,
+  LucideMoreHorizontal,
+  LucidePencil,
+  LucidePin,
   LucidePlus,
   LucideSearch,
+  LucideShare,
+  LucideTrash,
 } from "lucide-vue-next";
 import type { SidebarProps } from "~/components/ui/sidebar";
 
@@ -188,6 +193,33 @@ const filteredChats = computed(() => {
             <SidebarMenuButton>
               <span>{{ conversation.name }}</span>
             </SidebarMenuButton>
+            <DropdownMenu>
+              <DropdownMenuTrigger as-child>
+                <SidebarMenuAction show-on-hover>
+                  <LucideMoreHorizontal />
+                  <span class="sr-only">More</span>
+                </SidebarMenuAction>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <LucidePencil class="size-4" />
+                  <span>Rename</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <LucidePin class="size-4" />
+                  <span>Pin</span>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <LucideShare class="size-4" />
+                  <span>Share</span>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator class="bg-border/50" />
+                <DropdownMenuItem class="text-destructive">
+                  <LucideTrash class="text-destructive size-4" />
+                  <span>Delete</span>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </SidebarMenuItem>
           <SidebarMenuItem v-else>
             <SidebarMenuButton>
