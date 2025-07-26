@@ -45,7 +45,7 @@ const handleSubmit = (event: Event) => {
 </script>
 
 <template>
-  <div class="flex flex-col gap-2">
+  <div class="flex flex-col gap-2 px-4 sm:px-0">
     <div class="flex flex-wrap gap-2 overflow-x-auto">
       <Button
         v-for="suggestion in suggestions"
