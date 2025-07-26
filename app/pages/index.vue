@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useDark } from "@vueuse/core";
 import {
   LucideCopy,
   LucideMoon,
@@ -170,12 +169,11 @@ const suggestions = [
   "Explain cloud computing basics",
 ];
 
-const isDark = useDark();
+const colorMode = useColorMode();
 
-function toggleTheme() {
-  console.log("toggleTheme", isDark.value);
-  isDark.value = !isDark.value;
-}
+const toggleTheme = () => {
+  colorMode.preference = colorMode.preference === "dark" ? "light" : "dark";
+};
 </script>
 
 <template>
@@ -195,12 +193,12 @@ function toggleTheme() {
             <span class="text-sm font-medium">Shadcn Chat</span>
           </div>
           <div class="flex items-center gap-2 px-4">
-            <Toggle
+            <Button
               variant="ghost"
               size="icon"
-              class="group dark:hover:bg-muted size-7 dark:bg-transparent"
-              v-model="isDark"
-              :aria-label="`Switch to ${isDark ? 'light' : 'dark'} mode`"
+              class="size-7"
+              @click="toggleTheme"
+              :aria-label="`Switch to ${colorMode.preference === 'dark' ? 'light' : 'dark'} mode`"
             >
               <LucideMoon
                 class="size-4 shrink-0 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
@@ -210,7 +208,7 @@ function toggleTheme() {
                 class="absolute size-4 shrink-0 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
                 aria-hidden="true"
               />
-            </Toggle>
+            </Button>
           </div>
         </div>
       </header>
@@ -236,7 +234,11 @@ function toggleTheme() {
                 >
                   <Tooltip>
                     <TooltipTrigger as-child>
-                      <Button variant="ghost" size="icon" class="size-7">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        class="text-muted-foreground size-7"
+                      >
                         <LucideCopy class="size-4" />
                       </Button>
                     </TooltipTrigger>
@@ -245,7 +247,11 @@ function toggleTheme() {
 
                   <Tooltip>
                     <TooltipTrigger as-child>
-                      <Button variant="ghost" size="icon" class="size-7">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        class="text-muted-foreground size-7"
+                      >
                         <LucideThumbsUp class="size-4" />
                       </Button>
                     </TooltipTrigger>
@@ -254,7 +260,11 @@ function toggleTheme() {
 
                   <Tooltip>
                     <TooltipTrigger as-child>
-                      <Button variant="ghost" size="icon" class="size-7">
+                      <Button
+                        variant="ghost"
+                        size="icon"
+                        class="text-muted-foreground size-7"
+                      >
                         <LucideThumbsDown class="size-4" />
                       </Button>
                     </TooltipTrigger>
