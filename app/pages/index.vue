@@ -171,7 +171,10 @@ const suggestions = [
       >
         <div class="flex w-full items-center gap-2 px-4">
           <SidebarTrigger class="-ml-1" />
-          <Separator orientation="vertical" class="mr-2 h-4" />
+          <Separator
+            orientation="vertical"
+            class="data-[orientation=vertical]:h-4"
+          />
           <span class="text-sm font-medium">Shadcn Chat</span>
         </div>
       </header>

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LucideMessageCircle } from "lucide-vue-next";
+import { LucideMessageCircle, LucidePlus } from "lucide-vue-next";
 import type { SidebarProps } from "~/components/ui/sidebar";
 
 const props = withDefaults(defineProps<SidebarProps>(), {
@@ -133,7 +133,17 @@ const pastConversations = [
     </SidebarHeader>
     <SidebarContent>
       <SidebarGroup>
-        <SidebarGroupLabel>Conversations</SidebarGroupLabel>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton>
+              <LucidePlus class="size-4" />
+              <span>New chat</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarGroup>
+      <SidebarGroup>
+        <SidebarGroupLabel>Chats</SidebarGroupLabel>
         <SidebarMenu>
           <SidebarMenuItem
             v-for="conversation in pastConversations"
