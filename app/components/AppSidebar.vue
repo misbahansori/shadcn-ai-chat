@@ -1,12 +1,19 @@
 <script setup lang="ts">
-import { LucideMessageCircle, LucidePlus } from "lucide-vue-next";
+import {
+  LucideArrowRight,
+  LucideMessageCircle,
+  LucidePlus,
+  LucideSearch,
+} from "lucide-vue-next";
 import type { SidebarProps } from "~/components/ui/sidebar";
 
 const props = withDefaults(defineProps<SidebarProps>(), {
   variant: "inset",
 });
 
-const pastConversations = [
+const searchQuery = ref("");
+
+const chats = [
   {
     id: 1,
     name: "How to build a website",
@@ -108,6 +115,12 @@ const pastConversations = [
     description: "Creating better user experiences",
   },
 ];
+
+const filteredChats = computed(() => {
+  return chats.filter((chat) =>
+    chat.name.toLowerCase().includes(searchQuery.value.toLowerCase()),
+  );
+});
 </script>
 
 <template>
@@ -143,14 +156,42 @@ const pastConversations = [
         </SidebarMenu>
       </SidebarGroup>
       <SidebarGroup>
-        <SidebarGroupLabel>Chats</SidebarGroupLabel>
+        <SidebarMenu>
+          <div class="relative">
+            <Input
+              class="peer ps-9 pe-9"
+              placeholder="Search chats..."
+              type="search"
+              v-model="searchQuery"
+            />
+            <div
+              class="text-muted-foreground/80 pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 peer-disabled:opacity-50"
+            >
+              <LucideSearch :size="16" />
+            </div>
+            <button
+              class="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+              aria-label="Submit search"
+              type="submit"
+            >
+              <LucideArrowRight :size="16" aria-hidden="true" />
+            </button>
+          </div>
+        </SidebarMenu>
+        <SidebarGroupLabel class="mt-2">Chats</SidebarGroupLabel>
         <SidebarMenu>
           <SidebarMenuItem
-            v-for="conversation in pastConversations"
+            v-if="filteredChats.length"
+            v-for="conversation in filteredChats"
             :key="conversation.id"
           >
             <SidebarMenuButton>
               <span>{{ conversation.name }}</span>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem v-else>
+            <SidebarMenuButton>
+              <span class="text-muted-foreground">No chats found</span>
             </SidebarMenuButton>
           </SidebarMenuItem>
         </SidebarMenu>
