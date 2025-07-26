@@ -21,7 +21,7 @@ const searchQuery = ref("");
 const chats = [
   {
     id: 1,
-    name: "How to build a website",
+    name: "How to build a website using Vue 3, Nuxt 3, and Tailwind CSS",
     description: "I want to build a website",
   },
   {
