@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {
-  LucideArrowRight,
   LucideMessageCircle,
   LucideMoreHorizontal,
   LucidePencil,
@@ -164,7 +163,7 @@ const filteredChats = computed(() => {
         <SidebarMenu>
           <div class="relative">
             <Input
-              class="peer ps-9 pe-9"
+              class="peer ps-9"
               placeholder="Search chats..."
               type="search"
               v-model="searchQuery"
@@ -174,13 +173,6 @@ const filteredChats = computed(() => {
             >
               <LucideSearch :size="16" />
             </div>
-            <button
-              class="text-muted-foreground/80 hover:text-foreground focus-visible:border-ring focus-visible:ring-ring/50 absolute inset-y-0 end-0 flex h-full w-9 items-center justify-center rounded-e-md transition-[color,box-shadow] outline-none focus:z-10 focus-visible:ring-[3px] disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
-              aria-label="Submit search"
-              type="submit"
-            >
-              <LucideArrowRight :size="16" aria-hidden="true" />
-            </button>
           </div>
         </SidebarMenu>
         <SidebarGroupLabel class="mt-2">Chats</SidebarGroupLabel>

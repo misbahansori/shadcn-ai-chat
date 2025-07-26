@@ -1,12 +1,4 @@
 <script setup lang="ts">
-import {
-  LucideCopy,
-  LucideMoon,
-  LucideSun,
-  LucideThumbsDown,
-  LucideThumbsUp,
-} from "lucide-vue-next";
-
 interface Message {
   from: "user" | "assistant";
   content: string;
@@ -157,23 +149,6 @@ const messages: Message[] = [
     name: "OpenAI",
   },
 ];
-
-const suggestions = [
-  "What are the latest trends in AI?",
-  "How does machine learning work?",
-  "Explain quantum computing",
-  "Best practices for React development",
-  "Tell me about TypeScript benefits",
-  "How to optimize database queries?",
-  "What is the difference between SQL and NoSQL?",
-  "Explain cloud computing basics",
-];
-
-const colorMode = useColorMode();
-
-const toggleTheme = () => {
-  colorMode.preference = colorMode.preference === "dark" ? "light" : "dark";
-};
 </script>
 
 <template>
@@ -193,22 +168,7 @@ const toggleTheme = () => {
             <span class="text-sm font-medium">Shadcn Chat</span>
           </div>
           <div class="flex items-center gap-2 px-4">
-            <Button
-              variant="ghost"
-              size="icon"
-              class="size-7"
-              @click="toggleTheme"
-              :aria-label="`Switch to ${colorMode.preference === 'dark' ? 'light' : 'dark'} mode`"
-            >
-              <LucideMoon
-                class="size-4 shrink-0 scale-0 opacity-0 transition-all dark:scale-100 dark:opacity-100"
-                aria-hidden="true"
-              />
-              <LucideSun
-                class="absolute size-4 shrink-0 scale-100 opacity-100 transition-all dark:scale-0 dark:opacity-0"
-                aria-hidden="true"
-              />
-            </Button>
+            <ThemeToggle />
           </div>
         </div>
       </header>
@@ -218,80 +178,17 @@ const toggleTheme = () => {
         <div class="mx-auto max-w-3xl">
           <div class="flex-1 pb-64">
             <div class="flex flex-col gap-8">
-              <AIMessage
+              <ChatMessage
                 v-for="(message, index) in messages"
                 :key="index"
-                :from="message.from"
-                class="isolate"
-              >
-                <AIMessageContainer>
-                  <AIMessageContent>{{ message.content }}</AIMessageContent>
-                  <AIMessageAvatar :name="message.name" :src="message.avatar" />
-                </AIMessageContainer>
-                <AIMessageActions
-                  v-if="message.from === 'assistant'"
-                  class="mt-0.5 ml-8 flex items-center px-2"
-                >
-                  <Tooltip>
-                    <TooltipTrigger as-child>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        class="text-muted-foreground size-7"
-                      >
-                        <LucideCopy class="size-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">Copy</TooltipContent>
-                  </Tooltip>
-
-                  <Tooltip>
-                    <TooltipTrigger as-child>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        class="text-muted-foreground size-7"
-                      >
-                        <LucideThumbsUp class="size-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">Good answer</TooltipContent>
-                  </Tooltip>
-
-                  <Tooltip>
-                    <TooltipTrigger as-child>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        class="text-muted-foreground size-7"
-                      >
-                        <LucideThumbsDown class="size-4" />
-                      </Button>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom">Bad answer</TooltipContent>
-                  </Tooltip>
-                </AIMessageActions>
-              </AIMessage>
+                :message="message"
+              />
             </div>
           </div>
         </div>
       </div>
       <div class="absolute inset-x-0 bottom-2 flex flex-col gap-2">
         <div class="mx-auto w-full max-w-3xl">
-          <div
-            v-if="!messages.length"
-            class="flex flex-wrap gap-2 overflow-x-auto"
-          >
-            <Button
-              v-for="suggestion in suggestions"
-              :key="suggestion"
-              variant="outline"
-              class="h-auto rounded-full px-4 py-1 text-sm"
-            >
-              {{ suggestion }}
-            </Button>
-          </div>
-
           <ChatInput class="w-full" />
         </div>
       </div>
