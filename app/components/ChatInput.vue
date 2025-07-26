@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { LucideGlobe, LucideMic, LucidePlus } from "lucide-vue-next";
 
-const text = ref("asdsad");
 const model = ref("gpt-4");
 const status = ref<"submitted" | "streaming" | "ready" | "error">("ready");
 
@@ -28,36 +27,28 @@ const suggestions = [
   "Explain cloud computing basics",
 ];
 
-const handleSubmit = (event: Event) => {
-  event.preventDefault();
-  if (!text.value) {
-    return;
-  }
+const modelValue = defineModel<string>();
 
-  status.value = "submitted";
-  setTimeout(() => {
-    status.value = "streaming";
-  }, 200);
-  setTimeout(() => {
-    status.value = "ready";
-  }, 2000);
-};
+const emits = defineEmits<{
+  submit: [];
+}>();
 </script>
 
 <template>
   <div class="flex flex-col gap-2 px-4 sm:px-0">
-    <div class="flex flex-wrap gap-2 overflow-x-auto">
+    <!-- <div class="flex flex-wrap gap-2 overflow-x-auto">
       <Button
         v-for="suggestion in suggestions"
         :key="suggestion"
         variant="outline"
         class="dark:bg-background h-auto rounded-full px-4 py-1 text-sm"
+        @click="modelValue = suggestion"
       >
         {{ suggestion }}
       </Button>
-    </div>
-    <AIInput @submit="handleSubmit">
-      <AIInputTextarea v-model="text" />
+    </div> -->
+    <AIInput @submit.prevent="emits('submit')">
+      <AIInputTextarea v-model="modelValue" />
       <AIInputToolbar>
         <AIInputTools>
           <AIInputButton>
@@ -89,7 +80,7 @@ const handleSubmit = (event: Event) => {
             </SelectContent>
           </Select>
         </AIInputTools>
-        <AIInputSubmit :disabled="!text" :status="status" />
+        <AIInputSubmit :disabled="!modelValue" :status="status" />
       </AIInputToolbar>
     </AIInput>
   </div>

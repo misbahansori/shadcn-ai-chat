@@ -37,4 +37,8 @@ export default defineNuxtConfig({
   colorMode: {
     classSuffix: "",
   },
+
+  runtimeConfig: {
+    NUXT_OPENAI_API_KEY: process.env.NUXT_OPENAI_API_KEY,
+  },
 });

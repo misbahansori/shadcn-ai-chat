@@ -1,24 +1,26 @@
 <script setup lang="ts">
+import type { UIMessage } from "ai";
 import { LucideCopy, LucideThumbsDown, LucideThumbsUp } from "lucide-vue-next";
 
-interface Message {
-  from: "user" | "assistant";
-  content: string;
-  avatar: string;
-  name: string;
-}
 const { message } = defineProps<{
-  message: Message;
+  message: UIMessage;
 }>();
 </script>
 <template>
-  <AIMessage :from="message.from" class="isolate">
+  <AIMessage :from="message.role" class="isolate">
     <AIMessageContainer>
-      <AIMessageContent>{{ message.content }}</AIMessageContent>
-      <AIMessageAvatar :name="message.name" :src="message.avatar" />
+      <AIMessageContent>
+        <div
+          v-for="(part, index) in message.parts"
+          :key="`${message.id}-${part.type}-${index}`"
+        >
+          <div v-if="part.type === 'text'">{{ part.text }}</div>
+        </div>
+      </AIMessageContent>
+      <AIMessageAvatar :name="message.role" :src="message.role" />
     </AIMessageContainer>
     <AIMessageActions
-      v-if="message.from === 'assistant'"
+      v-if="message.role === 'assistant'"
       class="mt-0.5 ml-8 flex items-center px-2"
     >
       <Tooltip>
