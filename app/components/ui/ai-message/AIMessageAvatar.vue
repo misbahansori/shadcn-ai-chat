@@ -3,13 +3,11 @@ import type { HTMLAttributes } from "vue";
 import { Avatar, AvatarFallback, AvatarImage } from "~/components/ui/avatar";
 import { cn } from "~/utils/cn";
 
-interface AIMessageAvatarProps {
+const props = defineProps<{
   src: string;
   name?: string;
   class?: HTMLAttributes["class"];
-}
-
-const props = defineProps<AIMessageAvatarProps>();
+}>();
 </script>
 
 <template>

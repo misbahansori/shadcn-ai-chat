@@ -15,7 +15,7 @@ const props = defineProps<AIMessageContentProps>();
       cn(
         'flex flex-col gap-2 rounded-lg px-4 py-3 text-sm/relaxed',
         'bg-muted text-foreground',
-        'group-[.is-user]:bg-primary group-[.is-user]:text-primary-foreground',
+        'group-data-[from=user]:bg-primary group-data-[from=user]:text-primary-foreground',
         props.class,
       )
     "

@@ -3,7 +3,6 @@ import type { HTMLAttributes } from "vue";
 import { cn } from "~/utils/cn";
 
 const props = defineProps<{
-  from: "user" | "assistant";
   class?: HTMLAttributes["class"];
 }>();
 </script>
@@ -11,9 +10,13 @@ const props = defineProps<{
 <template>
   <div
     :class="
-      cn('group', from === 'user' ? 'is-user' : 'is-assistant', props.class)
+      cn(
+        'group flex w-full items-end justify-end gap-2 group-data-[from=assistant]:flex-row-reverse group-data-[from=user]:flex-row',
+        '[&>div]:max-w-[80%]',
+        props.class,
+      )
     "
-    :data-from="from"
+    v-bind="$attrs"
   >
     <slot />
   </div>
